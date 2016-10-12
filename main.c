@@ -9,7 +9,7 @@
 #define GRID_HEIGHT			80
 #define GRID_WIDTH_MI		(GRID_WIDTH - 1)	// MI = Maximum Index
 #define GRID_HEIGHT_MI		(GRID_HEIGHT - 1)	// This is just GRID_WIDTH/HEIGHT - 1
-#define GRID_BYTES_PER_ROW	(GRID_WIDTH / 2)	// This is just GRID_WIDTH / 2
+#define GRID_BYTES_PER_ROW	(GRID_WIDTH / 8)	// This is just GRID_WIDTH / 8
 #define GRID_SIZE			(GRID_WIDTH * GRID_HEIGHT)
 
 // Grid bit operations
