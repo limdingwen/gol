@@ -47,11 +47,11 @@
 #define MEMSIZE 0x3226
 
 #define GRID			((uint8_t*)			memstart + 0x0)
-#define GRID1			((uint8_t*)			memstart + 0x1900)					// Used to store new grid so old grid can be updated without affecting uncalculated areas
-#define C_GRID			((uint8_t**)		memstart + 0x3200)					// Current grid
-#define N_GRID			((uint8_t**)		memstart + 0x3208)		// New grid
+#define GRID1			((uint8_t*)			memstart + 0x1900)	// Used to store new grid so old grid can be updated without affecting uncalculated areas
+#define C_GRID			((uint8_t**)		memstart + 0x3200)	// Current grid
+#define N_GRID			((uint8_t**)		memstart + 0x3208)	// New grid
 
-#define RUNNING			((uint8_t*)			memstart + 0x3210)		// If running is false, main loop exits
+#define RUNNING			((uint8_t*)			memstart + 0x3210)	// If running is false, main loop exits
 #define PAUSED			((uint8_t*)			memstart + 0x3211)	// If paused is true, grid doesn't update
 #define USER_SETTING	((uint8_t*)			memstart + 0x3212)	// 0: Mouse not down, 1/2: Mouse down (1: Set, 2: Clear)
 
