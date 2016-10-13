@@ -10,7 +10,6 @@
 #define GRID_WIDTH_MI		(GRID_WIDTH - 1)	// MI = Maximum Index
 #define GRID_HEIGHT_MI		(GRID_HEIGHT - 1)	// This is just GRID_WIDTH/HEIGHT - 1
 #define GRID_BYTES_PER_ROW	(GRID_WIDTH / 8)	// This is just GRID_WIDTH / 8
-#define GRID_SIZE			(GRID_WIDTH * GRID_HEIGHT)
 
 // Grid bit operations
 
@@ -43,28 +42,25 @@
 #define EXIT_ERR	-1
 
 // Memory
+// Pointer sizes are 8 bytes each (64-bit)
 
-#define PTRSIZE	sizeof(void*)
-#define MEMSIZE (\
-	GRID_SIZE * 2 +	/* GRID, GRID1 */ \
-	PTRSIZE * 4 +	/* C_GRID, N_GRID, WINDOW, SCREEN_SURFACE, BUFFER */ \
-	6)				/* RUNNING, PAUSED, USER_SETTING, COLOR_R, COLOR_G, COLOR_B */
+#define MEMSIZE 0x3226
 
-#define GRID			((uint8_t*)			memstart)
-#define GRID1			((uint8_t*)			memstart + GRID_SIZE)					// Used to store new grid so old grid can be updated without affecting uncalculated areas
-#define C_GRID			((uint8_t**)		memstart + GRID_SIZE*2)					// Current grid
-#define N_GRID			((uint8_t**)		memstart + GRID_SIZE*2 + PTRSIZE)		// New grid
+#define GRID			((uint8_t*)			memstart + 0x0)
+#define GRID1			((uint8_t*)			memstart + 0x1900)					// Used to store new grid so old grid can be updated without affecting uncalculated areas
+#define C_GRID			((uint8_t**)		memstart + 0x3200)					// Current grid
+#define N_GRID			((uint8_t**)		memstart + 0x3208)		// New grid
 
-#define RUNNING			((uint8_t*)			memstart + GRID_SIZE*2 + PTRSIZE*2)		// If running is false, main loop exits
-#define PAUSED			((uint8_t*)			memstart + GRID_SIZE*2 + PTRSIZE*2 + 1)	// If paused is true, grid doesn't update
-#define USER_SETTING	((uint8_t*)			memstart + GRID_SIZE*2 + PTRSIZE*2 + 2)	// 0: Mouse not down, 1/2: Mouse down (1: Set, 2: Clear)
+#define RUNNING			((uint8_t*)			memstart + 0x3210)		// If running is false, main loop exits
+#define PAUSED			((uint8_t*)			memstart + 0x3211)	// If paused is true, grid doesn't update
+#define USER_SETTING	((uint8_t*)			memstart + 0x3212)	// 0: Mouse not down, 1/2: Mouse down (1: Set, 2: Clear)
 
-#define COLOR_R			((uint8_t*)			memstart + GRID_SIZE*2 + PTRSIZE*2 + 3)
-#define COLOR_G			((uint8_t*)			memstart + GRID_SIZE*2 + PTRSIZE*2 + 4)
-#define COLOR_B			((uint8_t*)			memstart + GRID_SIZE*2 + PTRSIZE*2 + 5)
+#define COLOR_R			((uint8_t*)			memstart + 0x3213)
+#define COLOR_G			((uint8_t*)			memstart + 0x3214)
+#define COLOR_B			((uint8_t*)			memstart + 0x3215)
 
-#define WINDOW			((SDL_Window**)		memstart + GRID_SIZE*2 + PTRSIZE*2 + 6)
-#define SCREEN_SURFACE	((SDL_Surface**)	memstart + GRID_SIZE*2 + PTRSIZE*3 + 6)
+#define WINDOW			((SDL_Window**)		memstart + 0x3216)
+#define SCREEN_SURFACE	((SDL_Surface**)	memstart + 0x321E)
 
 void* memstart;
 
